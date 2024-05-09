@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-python-app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-python-app
+  template:
+    metadata:
+      labels:
+        app: my-python-app
+    spec:
+      containers:
+      - name: my-python-app-container
+        image: circleci/python:3.9
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: "1"
+            memory: "512Mi" # Adjust as needed based on your application's requirements
+          requests:
+            cpu: "0.5"
+            memory: "256Mi" # Adjust as needed based on your application's requirements
